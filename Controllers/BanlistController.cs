@@ -17,10 +17,10 @@ public class BanlistController : Controller
     }
 
     [HttpGet("GetBanlists")]
-    public async Task<ActionResult<List<BanlistDTO>>> Get()
+    public async Task<ActionResult<List<Banlist>>> Get()
     {
         var list = await _dbContext.Set<Banlist>().Select(
-            s => new BanlistDTO
+            s => new Banlist
             {
                 Id = s.Id,
                 Nom = s.Nom,
@@ -40,9 +40,9 @@ public class BanlistController : Controller
     }
 
     [HttpGet("GetBanlistById")]
-    public async Task<ActionResult<BanlistDTO>> GetBanlistById(int Id)
+    public async Task<ActionResult<Banlist>> GetBanlistById(int Id)
     {
-        BanlistDTO Banlist = await _dbContext.Set<Banlist>().Select(s => new BanlistDTO
+        Banlist Banlist = await _dbContext.Set<Banlist>().Select(s => new Banlist
         {
             Id = s.Id,
             Nom = s.Nom,
@@ -74,7 +74,7 @@ public class BanlistController : Controller
     }
 
     [HttpPut("UpdateBanlist")]
-    public async Task<HttpStatusCode> UpdateBanlist(BanlistDTO Banlist)
+    public async Task<HttpStatusCode> UpdateBanlist(Banlist Banlist)
     {
         var entity = await _dbContext.Set<Banlist>().FirstOrDefaultAsync(s => s.Id == Banlist.Id);
         if (entity == null)

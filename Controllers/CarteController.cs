@@ -16,10 +16,10 @@ public class CarteController : Controller
     }
 
     [HttpGet("GetCartes")]
-    public async Task<ActionResult<List<CarteDTO>>> Get()
+    public async Task<ActionResult<List<Carte>>> Get()
     {
         var list = await _dbContext.Set<Carte>().Select(
-            s => new CarteDTO
+            s => new Carte
             {
                 Id = s.Id,
                 Nom = s.Nom,
@@ -38,9 +38,9 @@ public class CarteController : Controller
     }
 
     [HttpGet("GetCarteById")]
-    public async Task<ActionResult<CarteDTO>> GetCarteById(int Id)
+    public async Task<ActionResult<Carte>> GetCarteById(int Id)
     {
-        CarteDTO Carte = await _dbContext.Set<Carte>().Select(s => new CarteDTO
+        Carte Carte = await _dbContext.Set<Carte>().Select(s => new Carte
         {
             Id = s.Id,
             Nom = s.Nom,
@@ -57,7 +57,7 @@ public class CarteController : Controller
     }
 
     [HttpPost("InsertCarte")]
-    public async Task<HttpStatusCode> InsertCarte(CarteDTO Carte)
+    public async Task<HttpStatusCode> InsertCarte(Carte Carte)
     {
         var entity = new Carte()
         {
@@ -70,7 +70,7 @@ public class CarteController : Controller
     }
 
     [HttpPut("UpdateCarte")]
-    public async Task<HttpStatusCode> UpdateCarte(CarteDTO Carte)
+    public async Task<HttpStatusCode> UpdateCarte(Carte Carte)
     {
         var entity = await _dbContext.Set<Carte>().FirstOrDefaultAsync(s => s.Id == Carte.Id);
         if (entity == null)
